@@ -1,0 +1,140 @@
+%{
+package myCompiler;
+import java.io.*;
+%}
+
+%token PROGRAM_KW MAIN_KW IF_KW THEN_KW ELSE_KW AND_KW OR_KW NOT_KW SEMICOLON_KW SINGLE_QUOTE_KW LCB_KW RCB_KW ADD_KW SUB_KW BOOLEAN_CONSTANT CHAR_CONSTANT
+
+%code {
+	static PrintStream writer;
+
+    public static void main(String args[]) throws IOException, FileNotFoundException {
+        YYParser yyparser;
+        final Yylex lexer;
+
+        writer = new PrintStream(new File("output.txt"));
+        lexer = new Yylex(new InputStreamReader(new FileInputStream("java_code.txt")));
+
+        yyparser = new YYParser(new Lexer() {
+
+            @Override
+            public int yylex() {
+                int yyl_return = -1;
+                try {
+
+                    yyl_return = lexer.yylex();
+                } catch (IOException e) {
+                    System.err.println("IO error :" + e);
+                }
+                return yyl_return;
+            }
+
+            @Override
+            public void yyerror(String error) {
+                System.err.println("Error : " + error);
+            }
+
+            @Override
+            public Object getLVal() {
+                return null;
+            }
+        });
+        yyparser.parse();
+
+        return;
+    }
+}
+
+%left OR_KW
+%left AND_KW
+%left ADD_KW SUB_KW
+%right NOT_KW usub
+
+%%
+program:
+	PROGRAM_KW MAIN_KW block {
+		System.out.println("Rule 1.1: " +
+			"program: PROGRAM_KW MAIN_KW block");
+	}
+
+block:
+	LCB_KW statement_list RCB_KW {
+		System.out.println("Rule 2.1: " +
+			"block: LCB_KW statement_list RCB_KW ");
+	}
+	| LCB_KW RCB_KW {
+		System.out.println("Rule 2.2: " +
+			"block: LCB_KW RCB_KW ");
+	}
+
+statement_list:
+	statement SEMICOLON_KW {
+		System.out.println("Rule 3.1: " +
+			"statement_list: statement SEMICOLON_KW");
+	}
+	| statement_list statement SEMICOLON_KW {
+		System.out.println("Rule 3.2: " +
+			"statement_list: statement_list statement SEMICOLON_KW");
+	}
+
+statement:
+	expressions {
+		System.out.println("Rule 4.1: " +
+			"statement: expressions");
+	}
+	| IF_KW expressions THEN_KW block {
+		System.out.println("Rule 4.2: " +
+			"statement: IF_KW bool_expressions THEN_KW block");
+	}
+	| IF_KW expressions THEN_KW block ELSE_KW block {
+		System.out.println("Rule 4.3: " +
+			"statement: IF_KW bool_expressions THEN_KW block ELSE_KW block");
+	}
+
+expressions:
+	constant_expressions {
+		System.out.println("Rule 5.1: " +
+			"expressions: constant_expressions");
+	}
+	| bool_expressions {
+		System.out.println("Rule 5.2: " +
+			"expressions: bool_expressions");
+	}
+	| arithmatic_expressions{
+		System.out.println("Rule 5.3: " +
+			"expressions: arithmatic_expressions");
+	}
+
+constant_expressions:
+	CHAR_CONSTANT {
+		System.out.println("Rule 6.1: " +
+			"constant_expressions: CHAR_CONSTANT");
+	}
+	| BOOLEAN_CONSTANT {
+		System.out.println("Rule 6.2: " +
+			"constant_expressions: BOOLEAN_CONSTANT");
+	}	
+
+bool_expressions:
+	expressions AND_KW expressions {
+		System.out.println("Rule 7.1: " +
+			"bool_expressions: expressions AND_KW expressions");
+	}
+	| expressions OR_KW expressions {
+		System.out.println("Rule 7.2: " +
+			"bool_expressions: expressions OR_KW expressions");
+	}
+	| expressions NOT_KW expressions {
+		System.out.println("Rule 7.3: " +
+			"bool_expressions: expressions NOT_KW expressions");
+	}
+
+arithmatic_expressions:
+	expressions ADD_KW expressions {
+		System.out.println("Rule 8.1: " +
+			"arithmatic_expressions: expressions ADD_KW expressions");
+	}
+	| expressions SUB_KW expressions {
+		System.out.println("Rule 8.2: " +
+			"arithmatic_expressions: expressions SUB_KW expressions");
+	}

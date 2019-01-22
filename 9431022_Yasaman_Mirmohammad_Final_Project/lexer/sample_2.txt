@@ -1,0 +1,9 @@
+if (B1<5) 
+till(B1 != 5) 
+B1++; 
+If (B1== A) 
+A2 = false; 
+} 
+comeBack; 
+giveBack;
+} 

@@ -1,0 +1,57 @@
+program functionTest;
+	real a:=2.4,b:=333.44532,Result;
+	int  c:=3;
+	bool flag:=true and then true;
+	function swap (int m;real a,b) :real
+		real tempReal;
+		int tempInt:=3,tempInt2;
+		bool tempBool:=true;
+		begin
+			case m
+			1: 		
+				begin
+				tempReal:=a+b;
+				a:=tempReal-a;
+				b:=tempReal-b;
+				b:=tempReal*b;
+				b:=tempReal/b;
+				return a
+				end;
+			2:
+				begin
+					if tempBool or else a-b
+					then
+						return a
+					else
+						tempReal:= b;
+						return tempReal
+				end;
+			3:
+				while tempInt > 0				
+				do
+					begin
+						tempReal:=temp*a/b-tempReal+a;
+						tempInt:=tempInt-1
+					end	
+				;
+			4:
+				begin
+					for tempInt2:=2 to tempInt do
+						tempBool:=tempBool and then true or else false and then tempBool
+				end;
+			5:
+				return a;
+				
+			end;
+		return b
+		end
+	;
+	begin
+		while flag # true
+		do
+			begin
+				Result:=swap(c,a,b);
+				if Result < 2.45 then
+				flag:=false
+			end	
+	end;

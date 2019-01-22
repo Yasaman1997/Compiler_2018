@@ -1,0 +1,42 @@
+program test;
+int ad;
+function func(int n;bool b):real
+	begin
+		s:=0;
+		if b then
+		begin
+			return 1
+		end
+		else
+		begin
+			return func(n-1)+func(n-2)
+		end
+	end;
+	procedure pro(int z)
+	real r;
+	bool b;
+	begin	
+		while z>=0 do
+		begin
+			b:=true;
+			r:=11212.112;
+			for i:=0 to 10 do
+			begin
+				b:=b and then 1;
+				z:=z+1;
+				for j:= 100 to 0 downto
+					begin
+						z:=z+r*z-r/444.434;
+						if r#0 then
+							b:= r>=5 
+						else
+							return 1						
+					end
+			end
+		
+		end
+	end;
+begin
+	ad:=111.09
+	
+end;

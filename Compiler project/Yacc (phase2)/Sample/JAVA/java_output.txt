@@ -1,0 +1,32 @@
+Rule 6.2: constant_expressions: BOOLEAN_CONSTANT
+Rule 5.1: expressions: constant_expressions
+Rule 6.1: constant_expressions: CHAR_CONSTANT
+Rule 5.1: expressions: constant_expressions
+Rule 6.1: constant_expressions: CHAR_CONSTANT
+Rule 5.1: expressions: constant_expressions
+Rule 8.1: arithmatic_expressions: expressions ADD_KW expressions
+Rule 5.3: expressions: arithmatic_expressions
+Rule 4.1: statement: expressions
+Rule 3.1: statement_list: statement SEMICOLON_KW
+Rule 6.2: constant_expressions: BOOLEAN_CONSTANT
+Rule 5.1: expressions: constant_expressions
+Rule 4.1: statement: expressions
+Rule 3.2: statement_list: statement_list statement SEMICOLON_KW
+Rule 2.1: block: LCB_KW statement_list RCB_KW 
+Rule 6.1: constant_expressions: CHAR_CONSTANT
+Rule 5.1: expressions: constant_expressions
+Rule 4.1: statement: expressions
+Rule 3.1: statement_list: statement SEMICOLON_KW
+Rule 6.2: constant_expressions: BOOLEAN_CONSTANT
+Rule 5.1: expressions: constant_expressions
+Rule 6.2: constant_expressions: BOOLEAN_CONSTANT
+Rule 5.1: expressions: constant_expressions
+Rule 7.1: bool_expressions: expressions AND_KW expressions
+Rule 5.2: expressions: bool_expressions
+Rule 4.1: statement: expressions
+Rule 3.2: statement_list: statement_list statement SEMICOLON_KW
+Rule 2.1: block: LCB_KW statement_list RCB_KW 
+Rule 4.3: statement: IF_KW bool_expressions THEN_KW block ELSE_KW block
+Rule 3.1: statement_list: statement SEMICOLON_KW
+Rule 2.1: block: LCB_KW statement_list RCB_KW 
+Rule 1.1: program: PROGRAM_KW MAIN_KW block
